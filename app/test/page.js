@@ -1,16 +1,12 @@
-'use client' 
+"use client";
 
-import React from 'react';
-
-import { Template } from './components/Template';
+import React from "react";
+import Form from "./components/Form";
 
 const Page = () => {
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div>
-        <Template />
-      </div>
+    <div>
+      <Form />
     </div>
   );
 };
