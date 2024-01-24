@@ -1,0 +1,23 @@
+.main_logo{
+ padding-top: 10px;
+ padding-bottom: 10px;
+ display: flex;
+ justify-content: center;
+}
+.navbar{
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+.navbar-list{
+    display: flex;
+    justify-content: center;
+    
+}
+.navbar-list li {
+    margin-right: 30px;
+    color: #24456d;
+    font-size: 13px ;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1.6875;
+}

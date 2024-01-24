@@ -31,7 +31,7 @@ const slider = ({ sliderImages }) => {
     };
   return (
     <div>
-          <div className="w-full  relative">
+        <div className="w-full  relative">
                 <div className="overflow-hidden rounded-lg w-full">
                     <div
                         className="flex transition-transform duration-300 w-full  ease-in-out transform"
