@@ -1,6 +1,6 @@
-// Form.js
+"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import { useDropzone } from "react-dropzone";
@@ -8,12 +8,12 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 const Form = () => {
-  const [logoImage, setLogoImage] = useState(null);
-  const [navbarSections, setNavbarSections] = useState([]);
+  const [heroImage, setHeroImage] = useState(null);
   const [sliderImages, setSliderImages] = useState([]);
-  const [titleText, setTitleText] = useState("");
-  const [subtitleText, setSubtitleText] = useState("");
+  const [address, setAddress] = useState("");
+  const [color, setColor] = useState("#fff");
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] =useState(true);
   const router = useRouter();
 
   const onDropLogoImage = async (acceptedFiles) => {
@@ -24,6 +24,7 @@ const Form = () => {
       formData.append("upload_preset", "demo_builder_folder");
       formData.append("cloud_name", "debjbymt9");
       formData.append("folder", "Cloudinary-React");
+      console.log('testing -- form data: ', JSON.stringify(formData));
       try {
         const response = await fetch(
           "https://api.cloudinary.com/v1_1/debjbymt9/image/upload",
@@ -33,8 +34,7 @@ const Form = () => {
           }
         );
         const res = await response.json();
-        setLogoImage(res.secure_url);
-        console.log("testing: response: ", res);
+        setHeroImage(res.secure_url);
       } catch (err) {
         console.log("testing: error: ", err);
       }
@@ -56,7 +56,6 @@ const Form = () => {
           formData.append("upload_preset", "demo_builder_folder"); // Replace the preset name with your own
           formData.append("cloud_name", "debjbymt9");
           formData.append("folder", "Cloudinary-React");
-
           // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
           return axios
             .post(
@@ -89,29 +88,33 @@ const Form = () => {
     e.preventDefault();
 
     // Validate the form fields
-    if (
-      !logoImage ||
-      navbarSections.length === 0 ||
-      sliderImages.length < 4 ||
-      !titleText ||
-      !subtitleText
-    ) {
+    if (!heroImage || sliderImages.length < 4 || !address || !color) {
       alert("Please fill in all the required fields");
+      setDisabled(true);
       return;
+    }
+    else{
+        setDisabled(false);
     }
 
     try {
       // Prepare the data to be passed to the preview page
       const formData = {
-        logoImage,
-        navbarSections,
+        heroImage,
         sliderImages,
-        titleText,
-        subtitleText,
+        address,
+        fontColor: color,
       };
       localStorage.setItem("formData", JSON.stringify(formData));
-      router.push("/preview");
+      const res = await fetch("/api", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      console.log("testing ---- response: ", data.data);
+      //   router.push("/preview");
     } catch (error) {
+      setData("");
       console.error("Error converting images to base64:", error);
       alert("An error occurred while processing the images.");
     }
@@ -122,6 +125,7 @@ const Form = () => {
       accept: {
         "image/png": [".png"],
         "image/jpeg": [".jpg", ".jpeg"],
+        "image/avif":["avif"]
       },
       onDrop: onDropLogoImage,
       multiple: false,
@@ -139,115 +143,102 @@ const Form = () => {
   });
 
   return (
-    <form className="max-w-screen-md mx-auto mt-8" onSubmit={handleSubmit}>
-      {/* Logo Image */}
-      <div className="mb-4">
-        <label
-          htmlFor="logoImage"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Logo Image
-        </label>
-        <div {...getRootPropsLogo()} className="dropzone">
-          <input {...getInputPropsLogo()} />
-          <p className="p-1 text-[#cc4545] border-blue-100 border-2">
-            Drag 'n' drop an image, or click to select a file
-          </p>
+    <div>
+      <form className="max-w-screen-md mx-auto mt-8" onSubmit={handleSubmit}>
+        {/* Logo Image */}
+        <div className="mb-4">
+          <label
+            htmlFor="logoImage"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Hero Image
+          </label>
+          <div {...getRootPropsLogo()} className="dropzone">
+            <input {...getInputPropsLogo()} />
+            <p className="p-1 text-[#cc4545] border-blue-100 border-2">
+              Drag 'n' drop an image, or click to select a file
+            </p>
+          </div>
+          {loading && (
+            <div className="mt-2">
+              <p>Loading ..... </p>
+            </div>
+          )}
+          {heroImage && (
+            <div className="mt-2">
+              <p>Hero Image Uploaded</p>
+            </div>
+          )}
         </div>
-        {loading && (
-          <div className="mt-2">
-            <p>Loading ..... </p>
-          </div>
-        )}
-        {logoImage && (
-          <div className="mt-2">
-            <p>Image Uploaded</p>
-          </div>
-        )}
-      </div>
 
-      {/* Navbar Sections */}
-      <div className="mb-4">
-        <label
-          htmlFor="navbarSections"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Navbar Sections
-        </label>
-        <TagsInput
-          value={navbarSections}
-          onChange={(tags) => setNavbarSections(tags)}
-          inputProps={{ placeholder: "Press Tab to add a tag" }}
-        />
-      </div>
-
-      {/* Slider Images */}
-      <div className="mb-4">
-        <label
-          htmlFor="sliderImages"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Slider Images (min 4)
-        </label>
-        <div {...getRootPropsSlider()} className="dropzone">
-          <input {...getInputPropsSlider()} />
-          <p className="p-1 text-[#cc4545] border-blue-100 border-2">
-            Drag 'n' drop at least 4 images, or click to select files
-          </p>
+        {/* Slider Images */}
+        <div className="mb-4">
+          <label
+            htmlFor="sliderImages"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Slider Images (min 4)
+          </label>
+          <div {...getRootPropsSlider()} className="dropzone">
+            <input {...getInputPropsSlider()} />
+            <p className="p-1 text-[#cc4545] border-blue-100 border-2">
+              Drag 'n' drop at least 4 images, or click to select files
+            </p>
+          </div>
+          {loading && (
+            <div className="mt-2">
+              <p>Loading ..... </p>
+            </div>
+          )}
+          {sliderImages.length > 0 && (
+            <div className="mt-2">
+              <p>Uploaded {sliderImages.length} images</p>
+            </div>
+          )}
         </div>
-        {loading && (
-          <div className="mt-2">
-            <p>Loading ..... </p>
-          </div>
-        )}
-        {sliderImages.length > 0 && (
-          <div className="mt-2">
-            <p>Uploaded {sliderImages.length} images</p>
-          </div>
-        )}
-      </div>
 
-      {/* Title and Subtitle Text */}
-      <div className="mb-4">
-        <label
-          htmlFor="titleText"
-          className="block text-sm font-medium text-gray-700"
+        {/* Title and Subtitle Text */}
+        <div className="mb-4">
+          <label
+            htmlFor="titleText"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Address
+          </label>
+          <input
+            type="text"
+            id="titleText"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className="mt-1 p-2 border rounded-md w-full"
+          />
+        </div>
+
+        <div className="mb-4 w-12">
+          <label
+            htmlFor="color"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Color
+          </label>
+          <input
+            type="color"
+            id="color"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            className="mt-1 p-1 border rounded-md w-full"
+          />
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer disabled:bg-blue-300    "
         >
-          Title Text
-        </label>
-        <input
-          type="text"
-          id="titleText"
-          value={titleText}
-          onChange={(e) => setTitleText(e.target.value)}
-          className="mt-1 p-2 border rounded-md w-full"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="subtitleText"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Subtitle Text
-        </label>
-        <input
-          type="text"
-          id="subtitleText"
-          value={subtitleText}
-          onChange={(e) => setSubtitleText(e.target.value)}
-          className="mt-1 p-2 border rounded-md w-full"
-        />
-      </div>
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-md"
-      >
-        Submit
-      </button>
-    </form>
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 

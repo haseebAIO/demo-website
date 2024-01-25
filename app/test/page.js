@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import Form from "./components/Form";
+import { Template } from "./components/Template";
 
 const Page = () => {
   return (
     <div>
-      <Form />
+      <Template />
     </div>
   );
 };

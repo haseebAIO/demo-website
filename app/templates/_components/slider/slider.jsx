@@ -8,7 +8,7 @@ const slider = ({ sliderImages }) => {
 
     const slides = [
         "https://images.getbento.com/accounts/e9c30316149f0d973e280c0845ddac02/media/YTzr4InRS5e9oNEX6IW9_Noho_319_NF_740.jpg?w=1200&fit=max&auto=compress,format",
-        // "https://images.getbento.com/accounts/e9c30316149f0d973e280c0845ddac02/media/YTzr4InRS5e9oNEX6IW9_Noho_319_NF_740.jpg?w=1200&fit=max&auto=compress,format",
+        "https://res.cloudinary.com/debjbymt9/image/upload/v1705645372/Cloudinary-React/dw7s7bsrzzohjwqa9pzt.jpg",
         // "https://placekitten.com/802/402",
     ];
 
@@ -23,11 +23,21 @@ const slider = ({ sliderImages }) => {
         }
     }, [images])
     const nextSlide = () => {
-        setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+        if(currentSlide === slides.length-1){
+            setCurrentSlide(0);
+        }
+        else{
+            setCurrentSlide((prevSlide) => (prevSlide + 1));
+        }
     };
 
     const prevSlide = () => {
-        setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
+        if(currentSlide === 0){
+            setCurrentSlide(slides.length-1);
+        }
+        else{
+            setCurrentSlide((prevSlide) => (prevSlide - 1));
+        }
     };
   return (
     <div>
