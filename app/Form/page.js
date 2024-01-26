@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Form = () => {
   const [heroImage, setHeroImage] = useState(null);
-  const [sliderImages, setSliderImages] = useState([]);
+  const [sliderImages, setSliderImages] = useState({});
   const [address, setAddress] = useState("");
   const [color, setColor] = useState("#fff");
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,6 @@ const Form = () => {
       formData.append("upload_preset", "demo_builder_folder");
       formData.append("cloud_name", "debjbymt9");
       formData.append("folder", "Cloudinary-React");
-      console.log('testing -- form data: ', JSON.stringify(formData));
       try {
         const response = await fetch(
           "https://api.cloudinary.com/v1_1/debjbymt9/image/upload",
@@ -47,9 +46,9 @@ const Form = () => {
   const onDropSliderImages = async (acceptedFiles) => {
     if (acceptedFiles.length >= 4) {
       setLoading(true);
-      const images_url = [];
+      const images_url = {};
       try {
-        const uploaders = acceptedFiles.map(async (file) => {
+        const uploaders = acceptedFiles.map(async (file, index) => {
           // Initial FormData
           const formData = new FormData();
           formData.append("file", file);
@@ -68,10 +67,10 @@ const Form = () => {
             .then((response) => {
               const data = response.data;
               const fileURL = data.secure_url; // You should store this URL for future references in your app
-              images_url.push(fileURL);
+              images_url[`slideImage${index + 1}`]= fileURL;
             });
         });
-
+        
         // Once all the files are uploaded
         await axios.all(uploaders);
         setSliderImages(images_url);
@@ -88,7 +87,7 @@ const Form = () => {
     e.preventDefault();
 
     // Validate the form fields
-    if (!heroImage || sliderImages.length < 4 || !address || !color) {
+    if (!heroImage || Object.keys(sliderImages).length < 4 || !address || !color) {
       alert("Please fill in all the required fields");
       setDisabled(true);
       return;
@@ -101,7 +100,7 @@ const Form = () => {
       // Prepare the data to be passed to the preview page
       const formData = {
         heroImage,
-        sliderImages,
+        ...sliderImages,
         address,
         fontColor: color,
       };
@@ -111,8 +110,6 @@ const Form = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log("testing ---- response: ", data.data);
-      //   router.push("/preview");
     } catch (error) {
       setData("");
       console.error("Error converting images to base64:", error);
