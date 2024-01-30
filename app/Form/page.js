@@ -16,6 +16,21 @@ const Form = () => {
   const [disabled, setDisabled] =useState(true);
   const router = useRouter();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api'); // Assuming the file is in the public folder
+        const data = await response.json();
+        console.log('testing: ', JSON.parse(data.data));
+        // setJsonData(data);
+      } catch (error) {
+        console.error('Error fetching JSON file:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const onDropLogoImage = async (acceptedFiles) => {
     if (acceptedFiles.length === 1) {
       setLoading(true);

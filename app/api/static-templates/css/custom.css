@@ -1,4 +1,21 @@
+/* @import url(../fonts/Magistral\ W01\ Bold.ttf);
+@import url(../fonts/Dallas.ttf); */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* @font-face {
+  font-family: "MagistralW01-Bold";
+  src: url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.eot");
+  src: url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.svg#MagistralW01-Bold")
+      format("svg");
+} */
 
 * {
   margin: 0;
@@ -7,6 +24,7 @@
   box-sizing: border-box;
   text-decoration: none;
   scroll-behavior: smooth;
+  /* color: red !important; */
 }
 
 body {
@@ -73,92 +91,30 @@ select {
 
 /* header-css-started */
 
-.slider-1 {
-  width: 100%;
-  min-height: 100%;
-  position: relative;
-  background-color: #000;
-}
 
-/* header-css-start */
-.header-bar {
-  display: flex;
-  justify-content: center;
-  padding-top: 10px;
-  background-color: #f15a25;
-  padding-bottom: 10px;
-  position: relative;
-}
-.header-bar::after{
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: yellow;
-}
-.header-bar p{
-  font-size: 15px;
-  font-style: italic;
-  font-family: poppins;
-}
-nav{
-  background-color: #f15a25;
-}
-.navbar-nav {
-  display: flex;
-  justify-content: center;
-}
-.navbar-collapse{
-  display: flex;
-  justify-content: center;
-}
-.nav-link{
-  color: #fff;
-  font-weight: 800;
-}
-.nav-link:hover{
-  color: #000;
-  transition: .8s;
-}
-/* header-css-end */
 
-/* main-banner-section-css-start */
-.main-banner-section{
-  background-color:#f15a25 ;
-  width: 100%;
-  height: 800px;
-  margin-top: -22px;
-  position: relative;
-  z-index: -5;
-}
-.main-banner-section::after{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-image: url(../assets/images/stars.avif);
-  z-index: 1;
-  width: 100%;
-  height: 800px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: -1;
 
-}
-.main-banner-gif{
-  display: flex;
-  justify-content: center;
-  z-index: 1;
-}
-.main-banner-gif img{
-  max-width: 500px;
-  height: auto;
-  padding-top: 130px;
-}
-.banner-slider-img{
-  width: 100%;
-  height: 100%;
-}
 /* main-banner-section-css-end */
+
+
+/* media-query-start */
+
+@media only screen and (min-width: 1921px) and (max-width: 7368px) {}
+
+@media only screen and (min-width: 1600px) and (max-width: 1920px) {}
+
+@media only screen and (min-width: 1445px) and (max-width: 1599px) {}
+
+@media only screen and (min-width: 1366px) and (max-width: 1444px) {}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
+
+@media only screen and (min-width: 520px) and (max-width: 767px) {}
+
+@media only screen and (min-width: 300px) and (max-width: 519px) {}
+
+/* media-query-end*/

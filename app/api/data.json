@@ -1,0 +1,98 @@
+{
+    "templates": [
+      {
+        "name": "second",
+        "pages": [
+          {
+            "name": "home.html",
+            "placeholders": {
+              "logo": {
+                "value": "",
+                "type": "image"
+              },
+              "slideImage1": {
+                "value": "",
+                "type": "image"
+              },
+              "slideImage2": {
+                "value": "",
+                "type": "image"
+              },
+              "slideImage3": {
+                "value": "",
+                "type": "image"
+              },
+              "slideImage4": {
+                "value": "",
+                "type": "image"
+              },
+              "slideImage5": {
+                "value": "",
+                "type": "image"
+              },
+              "aboutLogo": {
+                "value": "",
+                "type": "image"
+              },
+              "aboutText1": {
+                  "value":"",
+                  "type":"string"
+              },
+              "aboutText2": {
+                  "value":"",
+                  "type":"string"
+              },
+              "chefImage": {
+                  "value":"",
+                  "type":"image"
+              },
+              "chefName": {
+                  "value":"",
+                  "type":"string"
+              },
+              "chefRole": {
+                  "value":"",
+                  "type":"string"
+              },
+              "chefDiscription": {
+                  "value":"",
+                  "type":"string"
+              },
+              "mapLink": {
+                  "value":"",
+                  "type":"string"
+              },
+              "contactLogo": {
+                  "value":"",
+                  "type":"image"
+              },
+              "contactDescription": {
+                  "value":"",
+                  "type":"string"
+              },
+              "contactApiLink": {
+                  "value":"",
+                  "type":"string"
+              },
+              "facebookHandle": {
+                  "value":"",
+                  "type":"string"
+              },
+              "instagramHandle": {
+                  "value":"",
+                  "type":"string"
+              }
+            }
+          },
+          {
+            "name": "faq.html",
+            "placeholders": {
+              "question1": "",
+              "answer1": ""
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
