@@ -6,10 +6,9 @@ import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const [jsonData, setJsonData] = useState(null);
-  const [formData, setFormData] = useState({
-    primaryColor:'#ff8000',
-    secondaryColor:'#FFFFFF'
-  });
+  const [formData, setFormData] = useState({});
+  const [primaryColor, setPrimaryColor] = useState("#ff8000");
+  const [secondaryColor, setSecondaryColor] = useState("#FFFFFF")
 
   const gellAllPlaceholders = (data) => {
     const placeholders = data.templates.reduce((acc, template) => {
@@ -86,17 +85,61 @@ const Page = () => {
       {jsonData && (
         <div className="mt-4 w-full flex flex-col justify-center items-center">
           <form className="grid grid-cols-3 gap-x-10">
-            <div className="flex justify-between items-center px-2">
-              <label htmlFor="primaryColor">Primary Color:</label>
-              <input type="color" id="primaryColor" className="p-1" defaultValue={"#ff8000"} onChange={(e) => {
-                handleChange('primaryColor', e.target.value)
-              }}/>
+            {/* Primary Color Selection Field */}
+            <div className="flex flex-col">
+              <label htmlFor="primaryColorHex" className="px-2">
+                Primary Color:
+              </label>
+              <div className="flex items-center px-2">
+                <input
+                  type="color"
+                  id="primaryColorHex"
+                  className=""
+                  value={primaryColor}
+                  onChange={(e) => {
+                    handleChange("primaryColor", e.target.value);
+                  }}
+                />
+                {/* <label htmlFor="primaryColor">Primary Color:</label> */}
+                <input
+                  type="text"
+                  name="primaryColor"
+                  id="primaryColors"
+                  placeholder="#ff8000"
+                  className="p-1 bg-slate-50 border-2 focus-visible:outline-none"
+                  onChange={(e) => {
+                    setPrimaryColor(e.target.value);
+                    handleChange("primaryColor", e.target.value);
+                  }}
+                />
+              </div>
             </div>
-            <div className="flex justify-between items-center px-2">
-              <label htmlFor="primaryColor">Secondary Color:</label>
-              <input type="color" id="secondaryColor" className="p-1" defaultValue={"#FFFFFF"} onChange={(e) => {
-                handleChange('secondaryColor', e.target.value)
-              }}/>
+            {/* Secondary Color Selection Field */}
+            <div className="flex flex-col">
+              <label htmlFor="secondaryColorHex">Secondary Color:</label>
+              <div className="flex items-center px-2">
+                <input
+                  type="color"
+                  id="secondaryColorHex"
+                  className=""
+                  value={secondaryColor}
+                  onChange={(e) => {
+                    handleChange("secondaryColor", e.target.value);
+                  }}
+                />
+                {/* <label htmlFor="primaryColor">Primary Color:</label> */}
+                <input
+                  type="text"
+                  name="secondaryColor"
+                  id="secondaryColor"
+                  placeholder="#FFFFFF"
+                  className="p-1 bg-slate-50 border-2 focus-visible:outline-none"
+                  onChange={(e) => {
+                    setSecondaryColor(e.target.value);
+                    handleChange("secondaryColor", e.target.value);
+                  }}
+                />
+              </div>
             </div>
             {Object.keys(jsonData).map((placeholderName, key) => (
               <div key={placeholderName + key} className="flex flex-col p-2">
