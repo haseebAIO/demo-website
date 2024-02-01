@@ -129,6 +129,10 @@
               "value": "",
               "type": "string"
             },
+            "twitterHandle":{
+              "value":"",
+              "type":"string"
+            },
             "mapLink": {
               "value": "",
               "type": "string"

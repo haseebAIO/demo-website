@@ -6,7 +6,10 @@ import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const [jsonData, setJsonData] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    primaryColor:'#ff8000',
+    secondaryColor:'#FFFFFF'
+  });
 
   const gellAllPlaceholders = (data) => {
     const placeholders = data.templates.reduce((acc, template) => {
@@ -69,10 +72,13 @@ const Page = () => {
   const handleSubmit = async () => {
     console.log("testing: form data: ", formData);
     // console.log("testing: modified data: ", modifiedData);
-    await fetch("/api", {
+    const res = await fetch("/api", {
       method: "POST",
       body: JSON.stringify(formData),
     });
+    const response = await res.json();
+    localStorage.setItem('routes',JSON.stringify(response.data));
+    console.log('testing: ', response);
   };
 
   return (

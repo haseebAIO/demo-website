@@ -21,6 +21,7 @@
   <link href="css/main-banner.css" rel="stylesheet" type="text/css" />
   <link href="css/header.css" rel="stylesheet" type="text/css" />
   <link href="css/slider.css" rel="stylesheet" type="text/css" />
+  <link href="css/global.css" rel="stylesheet" type="text/css" />
   <link href="css/contact.css" rel="stylesheet" type="text/css" />
   <link href="css/visit-us.css" rel="stylesheet" type="text/css" />
   <!-- <link href="css/custom-2.css" rel="stylesheet" type="text/css">
@@ -110,23 +111,23 @@
   <section class="menu-section">
     <div class="">
       <div class="menu-heading">
-        <h2 class="secondary">ABOUT</h2>
+        <h2 class="primary">ABOUT</h2>
         <div class="tie-box">
           <img src="{{aboutLogo}}" alt="tie">
         </div>
         <div class="container">
-          <p class="primary">
+          <p class="secondary">
             {{aboutUsSubtitle1}}
           </p>
-          <p class="primary">{{aboutUsSubtitle2}}</p>
+          <p class="secondary">{{aboutUsSubtitle2}}</p>
 
           <div class="chef-box">
             <div class="d-flex justify-content-center mt-3">
               <img class="" src="{{chefImage}}" alt="chef-image" width="360" height="360">
             </div>
-            <h3  class="secondary">{{chefName}}</h3>
+            <h3  class="primary">{{chefName}}</h3>
             <h4 class="secondary">{{chefRole}}</h4>
-            <p class="primary">
+            <p class="secondary">
               {{chefDescription}}
             </p>
           </div>
@@ -202,12 +203,12 @@
   <section class="contact-section">
     <div class="container">
       <div class="contact-heading">
-        <h2 class="secondary">CONTACT</h2>
+        <h2 class="primary">CONTACT</h2>
         <div class="tie-box">
           <img src="{{contactLogo}}" alt="tie">
         </div>
         <div class="container">
-          <p class="primary">
+          <p class="secondary">
             {{contactDescription}}
           </p>
           <h5 class="contact-number secondary">Wicker Park <a href="javascript:;">: (773) 770-9015</a></p>
@@ -216,9 +217,9 @@
           </h5>
            
 
-          <p class="mt-5 primary">Placing an order? Click: here</p>
+          <p class="mt-5 secondary">Placing an order? Click: here</p>
 
-          <p class="primary">Or send us a message using the form below and we’ll get back to you as soon as possible. Looking forward to hearing from you soon!
+          <p class="secondary">Or send us a message using the form below and we’ll get back to you as soon as possible. Looking forward to hearing from you soon!
 
           </p>
 
@@ -230,19 +231,19 @@
         <form action="">
           <div class="row">
             <div class="col-lg-12">
-              <label class="primary" for="">Name</label> <br>
+              <label class="secondary" for="">Name</label> <br>
               <input type="text">
             </div>
             <div class="col-lg-12">
-              <label class="primary" for="">Email</label><br>
+              <label class="secondary" for="">Email</label><br>
               <input type="text">
             </div>
             <div class="col-lg-12">
-              <label class="primary" for="">Phone Number</label><br>
+              <label class="secondary" for="">Phone Number</label><br>
               <input type="text">
             </div>
             <div class="col-lg-12">
-              <label for="" class="primary">What are you gettingin touch about ?</label><br>
+              <label for="" class="secondary">What are you gettingin touch about ?</label><br>
               <select id="1955250" class="form-control unselected" name="1955250" required="" oninvalid="this.setCustomValidity('Please select a valid option for \'what are you getting in touch about?\'')" oninput="setCustomValidity('')" aria-describedby="1955250-error">
                 <option value="" selected="" disabled="">What are you getting in touch about?</option>
                     <option value="Adjustment to existing order">Adjustment to existing order</option>
@@ -253,7 +254,7 @@
             </select>
             </div>
             <div class="col-lg-12">
-              <label for="" class="primary">Which location are you trying to reach? - Required
+              <label for="" class="secondary">Which location are you trying to reach? - Required
               </label><br>
               <select id="1955252" class="form-control unselected" name="1955252" required="" oninvalid="this.setCustomValidity('Please select a valid location')" oninput="setCustomValidity('')" aria-describedby="1955252-error">
                 <option value="" selected="" disabled="">Which location are you trying to reach?</option>
@@ -262,7 +263,7 @@
             </select>
             </div>
             <div class="col-lg-12">
-              <label for="" class="primary">Phone Number</label><br>
+              <label for="" class="secondary">Phone Number</label><br>
               <textarea name="" id="" cols="170" rows="4"></textarea>
             </div>
           </div>
@@ -312,15 +313,15 @@
       <ul>
         <li>
           <div class="d-flex justify-content-space-between">
-            <a href="" class="primary">
+            <a href="https://www.facebook.com/{{facebookHandle}}">
               <i class=" footer-icon fa-brands fa-facebook-f"></i>
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/{{instagramHandle}}" >
               <i class="footer-icon fa-brands fa-instagram"></i>
             </a>
           </div>
         </li>
-        <li><a href="" class="primary">EMAIL SIGNUP</a></li>
+        <li><a href="" >EMAIL SIGNUP</a></li>
       </ul>
     </div>
 

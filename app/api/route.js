@@ -49,6 +49,7 @@ function covnertPlaceholderData(data) {
 }
 
 export async function POST(request) {
+  const folderAddresses = [];
   const json = "./app/api/data.json";
   let jsonData = fs.readFileSync(json, "utf8");
   jsonData = JSON.parse(jsonData);
@@ -60,6 +61,7 @@ export async function POST(request) {
     const copyFolderPath = `${templateFolderPath}/${template.name}`;
     const tempFolderName = `temp-working-${uuid.v4()}`;
     const tempFolderPath = `./temp-Templates/${tempFolderName}`;
+    folderAddresses.push(tempFolderName);
 
     // Copy the template files to the temporary working folder
     fs.copySync(copyFolderPath, tempFolderPath);
@@ -104,13 +106,12 @@ export async function POST(request) {
 
         // await zipDirectory(tempFolderPath, "./sample.zip");
       });
-      return NextResponse.json({ status: "success" });
 
     } catch (error) {
       return NextResponse.json({ status: "failed" });
     }
   });
-  return NextResponse.json({ status: "success" });
+  return NextResponse.json({ status: "success", data:folderAddresses });
 }
 
 export async function GET() {
