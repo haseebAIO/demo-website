@@ -31,67 +31,71 @@ function zipDirectory(sourceDir, outPath) {
 
 function parseTemplate(templateContent, data) {
   Object.keys(data).forEach((key) => {
-    const placeholder = new RegExp(`\\{${key}\\}`, "g");
+    const placeholder = new RegExp(`\\{{${key}\\}}`, "g");
     templateContent = templateContent.replace(placeholder, data[key]);
   });
 
   return templateContent;
 }
 
-function covnertPlaceholderData(data){
+function covnertPlaceholderData(data) {
   const outputObject = {};
   for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-          outputObject[key] = data[key].value;
-      }
+    if (data.hasOwnProperty(key)) {
+      outputObject[key] = data[key].value;
+    }
   }
   return outputObject;
 }
 
 export async function POST(request) {
+  const json = "./app/api/data.json";
+  let jsonData = fs.readFileSync(json, "utf8");
+  jsonData = JSON.parse(jsonData);
   const userData = await request.json();
-  console.log(userData.pages[0].placeholders);
-  const templateFolderPath = path.resolve("./app/api/static-templates");
+  const templateFolderPath = path.resolve("./templates");
 
-  // Create a unique identifier for the temporary working folder
-  const tempFolderName = `temp-working-${uuid.v4()}`;
-  const tempFolderPath = `./temp-folders/${tempFolderName}`;
+  jsonData.templates.forEach((template) => {
+    // Create a unique identifier for the temporary working folder
+    const copyFolderPath = `${templateFolderPath}/${template.name}`;
+    const tempFolderName = `temp-working-${uuid.v4()}`;
+    const tempFolderPath = `./temp-Templates/${tempFolderName}`;
 
-  // Copy the template files to the temporary working folder
-  fs.copySync(templateFolderPath, tempFolderPath);
+    // Copy the template files to the temporary working folder
+    fs.copySync(copyFolderPath, tempFolderPath);
 
-  try {
-    userData?.pages?.forEach(async (value)=>{
-      const templatePath = `${tempFolderPath}/${value.name}`;
+    try {
+      template?.pages?.forEach((value) => {
+        const templatePath = `${tempFolderPath}/${value.name}`;
+        let templateContent = fs.readFileSync(templatePath, "utf-8");
+        // let cssContent = fs.readFileSync(cssPath, "utf-8");
 
-      let templateContent = fs.readFileSync(templatePath, "utf-8");
-      // let cssContent = fs.readFileSync(cssPath, "utf-8");
-    
-      templateContent = parseTemplate(templateContent, value.placeholders);
-    
-      // // Update the CSS content
-      // cssContent = cssContent.replace(
-      //   "* {",
-      //   `* {\n  color: ${userData.fontColor} !important;`
-      // );
-    
-      // // Write the modified content back to the HTML file
-      fs.writeFileSync(templatePath, templateContent, "utf-8");
-      // fs.writeFileSync(cssPath, cssContent, "utf-8");
-    
-      await zipDirectory(tempFolderPath, "./sample.zip");
-    
-      
-    });
+        templateContent = parseTemplate(templateContent, userData);
+
+        // // Update the CSS content
+        // cssContent = cssContent.replace(
+        //   "* {",
+        //   `* {\n  color: ${userData.fontColor} !important;`
+        // );
+
+        // // Write the modified content back to the HTML file
+        fs.writeFileSync(templatePath, templateContent, "utf-8");
+        console.log('TEMPLATE UPDATED ----> ', value.name);
+        // fs.writeFileSync(cssPath, cssContent, "utf-8");
+
+        // await zipDirectory(tempFolderPath, "./sample.zip");
+      });
     return NextResponse.json({ status: "success" });
-  } catch (error) {
-    return NextResponse.json({ status: "failed" });
-    
-  }
+
+    } catch (error) {
+      return NextResponse.json({ status: "failed" });
+    }
+  });
+  return NextResponse.json({ status: "success" });
 }
 
-export async function GET(){
-  const jsonData = './app/api/data.json';
+export async function GET() {
+  const jsonData = "./app/api/data.json";
   const data = fs.readFileSync(jsonData, "utf8");
-  return NextResponse.json({data});
+  return NextResponse.json({ data });
 }
