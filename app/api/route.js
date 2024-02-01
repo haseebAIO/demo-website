@@ -64,19 +64,38 @@ export async function POST(request) {
     // Copy the template files to the temporary working folder
     fs.copySync(copyFolderPath, tempFolderPath);
 
+    const cssTemplate = `${tempFolderPath}/css/global.css`;
+
+    let cssContent = fs.readFileSync(cssTemplate, "utf-8");
+
+    // // Update the CSS content
+    cssContent = cssContent.replace(
+      ".primary {",
+      `.primary {\n  color: ${userData.primaryColor} !important;`
+    );
+
+    cssContent = cssContent.replace(
+      ".primary-btn {",
+      `.primary-btn {\n  background-color: ${userData.primaryColor} !important;`
+    );
+
+    cssContent = cssContent.replace(
+      ".secondary {",
+      `.secondary {\n  color: ${userData.secondaryColor} !important;`
+    );
+
+    cssContent = cssContent.replace(
+      ".secondary-btn {",
+      `.secondary-btn {\n  background-color: ${userData.secondaryColor} !important;`
+    );
+    fs.writeFileSync(cssTemplate, cssContent);
+
     try {
       template?.pages?.forEach((value) => {
         const templatePath = `${tempFolderPath}/${value.name}`;
         let templateContent = fs.readFileSync(templatePath, "utf-8");
-        // let cssContent = fs.readFileSync(cssPath, "utf-8");
 
         templateContent = parseTemplate(templateContent, userData);
-
-        // // Update the CSS content
-        // cssContent = cssContent.replace(
-        //   "* {",
-        //   `* {\n  color: ${userData.fontColor} !important;`
-        // );
 
         // // Write the modified content back to the HTML file
         fs.writeFileSync(templatePath, templateContent, "utf-8");
@@ -85,7 +104,7 @@ export async function POST(request) {
 
         // await zipDirectory(tempFolderPath, "./sample.zip");
       });
-    return NextResponse.json({ status: "success" });
+      return NextResponse.json({ status: "success" });
 
     } catch (error) {
       return NextResponse.json({ status: "failed" });
