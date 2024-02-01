@@ -28,7 +28,7 @@ const Page = () => {
         let data = await response.json();
         data = JSON.parse(data.data);
         const placeholders = gellAllPlaceholders(data);
-        console.log('Testing: ', placeholders);
+        console.log("Testing: ", placeholders);
         setJsonData(placeholders);
       } catch (error) {
         console.error("Error fetching JSON file:", error);
@@ -78,18 +78,27 @@ const Page = () => {
   return (
     <div className="flex justify-start items-start">
       {jsonData && (
-        <div>
-          <form>
+        <div className="mt-4 w-full flex flex-col justify-center items-center">
+          <form className="grid grid-cols-3 gap-x-10">
+            <div className="flex justify-between items-center px-2">
+              <label htmlFor="primaryColor">Primary Color:</label>
+              <input type="color" id="primaryColor" className="p-1" defaultValue={"#ff8000"} onChange={(e) => {
+                handleChange('primaryColor', e.target.value)
+              }}/>
+            </div>
+            <div className="flex justify-between items-center px-2">
+              <label htmlFor="primaryColor">Secondary Color:</label>
+              <input type="color" id="secondaryColor" className="p-1" defaultValue={"#FFFFFF"} onChange={(e) => {
+                handleChange('secondaryColor', e.target.value)
+              }}/>
+            </div>
             {Object.keys(jsonData).map((placeholderName, key) => (
-              <div
-                key={placeholderName + key}
-                className="flex flex-col p-2 border-black-100 border-b-2"
-              >
+              <div key={placeholderName + key} className="flex flex-col p-2">
                 <label htmlFor={placeholderName}>{placeholderName}</label>
                 {jsonData[placeholderName].type === "image" ? (
                   <input
                     type="file"
-                    className="border-blue-100 border-2"
+                    className="border-blue-100 border-2 p-1"
                     id={placeholderName}
                     onChange={async (e) => {
                       const url = await uploadData(e.target.files[0]);
