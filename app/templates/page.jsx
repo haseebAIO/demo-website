@@ -13,7 +13,7 @@ const page = () => {
   return (
     <div className='flex flex-col justify-center m-10'>
       {data.length && data.map((route, index) => (
-        <div>
+        <div className='bg-white text-blue-950 underline text-2xl m-2'>
           <a href={`http://127.0.0.1:5501/temp-templates/${route}/index.html`} target="_blank"><h1>Template {index + 1}</h1></a>
         </div>
       ))}

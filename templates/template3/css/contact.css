@@ -1,0 +1,89 @@
+.contact-section {
+    background-color: #FACD01;
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+
+.contact-heading h2 {
+    font-family: poppins;
+    font-size: 26px;
+    color: #165737;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+}
+
+.contact-form input {
+    width: 70%;
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 2px solid #165737;
+}
+
+.contact-form label {
+    font-family: poppins;
+    font-style: italic;
+    color: #165737;
+    font-weight: 600;
+}
+
+.direction-btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 2px solid #165737;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 600;
+    color: #165737;
+    padding: 8px 32px;
+    font-family: poppins;
+    box-shadow: -6px 5px 0px 0px #165737;
+
+}
+
+.footer-img img {
+    width: 100%;
+    height: 120px;
+    background-size: cover;
+}
+
+.ul-bg {
+    background-color: #FACD01;
+}
+
+.footer-ul {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-ul li a {
+    color: #165737;
+    font-weight: 600;
+}
+.address-bar{
+    background-color:#f15a25 ;
+    padding: 10px;
+}
+.address-bar ul{
+    display: flex;
+    justify-content: space-between;
+}
+.address-bar li a i{
+    color: #fff;
+    font-size: 20px;
+    margin-right: 15px;
+}
+.address-bar li a{
+    color: #fff;
+    font-weight: 700;
+}
