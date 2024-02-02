@@ -30,7 +30,6 @@ const Page = () => {
         let data = await response.json();
         data = JSON.parse(data.data);
         const placeholders = gellAllPlaceholders(data);
-        console.log("Testing: ", placeholders);
         setJsonData(placeholders);
       } catch (error) {
         console.error("Error fetching JSON file:", error);
@@ -97,6 +96,7 @@ const Page = () => {
                   className=""
                   value={primaryColor}
                   onChange={(e) => {
+                    setPrimaryColor(e.target.value);
                     handleChange("primaryColor", e.target.value);
                   }}
                 />
@@ -105,6 +105,7 @@ const Page = () => {
                   type="text"
                   name="primaryColor"
                   id="primaryColors"
+                  value={primaryColor}
                   placeholder="#ff8000"
                   className="p-1 bg-slate-50 border-2 focus-visible:outline-none"
                   onChange={(e) => {
@@ -124,6 +125,7 @@ const Page = () => {
                   className=""
                   value={secondaryColor}
                   onChange={(e) => {
+                    setSecondaryColor(e.target.value);
                     handleChange("secondaryColor", e.target.value);
                   }}
                 />
@@ -133,6 +135,7 @@ const Page = () => {
                   name="secondaryColor"
                   id="secondaryColor"
                   placeholder="#FFFFFF"
+                  value={secondaryColor}
                   className="p-1 bg-slate-50 border-2 focus-visible:outline-none"
                   onChange={(e) => {
                     setSecondaryColor(e.target.value);
