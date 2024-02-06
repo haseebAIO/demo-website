@@ -2,13 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 
+import { UploadButton } from "../../utils/uploadthing";
+
 // ... (previous imports)
 
 const Page = () => {
   const [jsonData, setJsonData] = useState(null);
   const [formData, setFormData] = useState({});
   const [primaryColor, setPrimaryColor] = useState("#ff8000");
-  const [secondaryColor, setSecondaryColor] = useState("#FFFFFF")
+  const [secondaryColor, setSecondaryColor] = useState("#FFFFFF");
+  const [hasCustomFont, setHasCustomFont] = useState(false);
 
   const gellAllPlaceholders = (data) => {
     const placeholders = data.templates.reduce((acc, template) => {
@@ -75,8 +78,8 @@ const Page = () => {
       body: JSON.stringify(formData),
     });
     const response = await res.json();
-    localStorage.setItem('routes',JSON.stringify(response.data));
-    console.log('testing: ', response);
+    localStorage.setItem("routes", JSON.stringify(response.data));
+    console.log("testing: ", response);
   };
 
   return (
@@ -144,6 +147,62 @@ const Page = () => {
                 />
               </div>
             </div>
+
+            {/* Font Input Field */}
+            {!hasCustomFont ? (
+              <div className="flex flex-col justify-center gap-1">
+                <label htmlFor="fontInput">Select Font:</label>
+                <select
+                  name="fontInput"
+                  id="fontInput"
+                  className="py-2 px-1"
+                  onChange={(e) => handleChange("fontInput", e.target.value)}
+                >
+                  <option default value="Arial">
+                    Arial
+                  </option>
+                  <option value="Josefin Sans">Josefin Sans</option>
+                  <option value="Montserrat">Montserrat</option>
+                </select>
+              </div>
+            ) : (
+              <div className="flex flex-col justify-center">
+                <label htmlFor="customFontName">Font Name:</label>
+                <input
+                  type="text"
+                  name="customFontName"
+                  id="customFontName"
+                  className="border-blue-100 border-2 p-1"
+                  onChange={(e) =>
+                    handleChange("customFontName", e.target.value)
+                  }
+                />
+              </div>
+            )}
+
+            {/* User Uploaded Font Input Group */}
+            <div className="mt-2 ml-2">
+              {/* YES/NO Select for upload custom font */}
+              <div className="flex flex-col justify-center gap-1">
+                <label htmlFor="fontInput">Upload Custom Font:</label>
+                <select
+                  name="customFont"
+                  id="customFont"
+                  className="py-2 px-1"
+                  onChange={(e) => {
+                    handleChange("hasCustomFont", e.target.value);
+                    setHasCustomFont((s) => !s);
+                  }}
+                >
+                  <option default value={false}>
+                    No
+                  </option>
+                  <option value={true}>Yes</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Map placeholders into form fields */}
             {Object.keys(jsonData).map((placeholderName, key) => (
               <div key={placeholderName + key} className="flex flex-col p-2">
                 <label htmlFor={placeholderName}>{placeholderName}</label>
@@ -170,6 +229,22 @@ const Page = () => {
               </div>
             ))}
           </form>
+
+          <div className="my-4">
+            <UploadButton
+              endpoint="fontUploader"
+              onClientUploadComplete={(res) => {
+                // Do something with the response
+                console.log("Files: ", res);
+                alert("Upload Completed");
+              }}
+              onUploadError={(error) => {
+                // Do something with the error.
+                alert(`ERROR! ${error.message}`);
+              }}
+            />
+          </div>
+
           <button
             className="m-2 p-2 border-black border-2"
             onClick={handleSubmit}

@@ -90,6 +90,30 @@ export async function POST(request) {
       ".secondary-btn {",
       `.secondary-btn {\n  background-color: ${userData.secondaryColor} !important;`
     );
+
+    if(!userData?.hasCustomFont){
+      cssContent = cssContent.replace(
+        "* {",
+        `* {\n font-family: '${userData.fontInput}', sans-serif !important;\n`
+      );
+    }
+
+    console.log("hasCustomFont:", userData.hasCustomFont);
+
+    if(userData?.hasCustomFont){
+      cssContent = cssContent.replace(
+        "@font-face {",
+        `@font-face {\n font-family: "${userData.customFontName}" !important;\n
+        src: url('https://github.com/ZaryabAIO/custom-font/blob/main/fonts/Tomatoes-font.ttf');`
+      )
+
+      //Inject the custom font name 
+      cssContent = cssContent.replace(
+        "* {",
+        `* {\n font-family: '${userData.customFontName}' !important;\n`
+      );
+    }
+
     fs.writeFileSync(cssTemplate, cssContent);
 
     try {
