@@ -1,0 +1,120 @@
+/* @import url(../fonts/Magistral\ W01\ Bold.ttf);
+@import url(../fonts/Dallas.ttf); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* @font-face {
+  font-family: "MagistralW01-Bold";
+  src: url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.eot");
+  src: url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/479db221f0230d8e10c5bf8c95695c7c.svg#MagistralW01-Bold")
+      format("svg");
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  box-sizing: border-box;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  /* color: red !important; */
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a,
+button {
+  display: inline-block;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+select {
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* header-css-started */
+
+
+
+
+/* main-banner-section-css-end */
+
+
+/* media-query-start */
+
+@media only screen and (min-width: 1921px) and (max-width: 7368px) {}
+
+@media only screen and (min-width: 1600px) and (max-width: 1920px) {}
+
+@media only screen and (min-width: 1445px) and (max-width: 1599px) {}
+
+@media only screen and (min-width: 1366px) and (max-width: 1444px) {}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
+
+@media only screen and (min-width: 520px) and (max-width: 767px) {}
+
+@media only screen and (min-width: 300px) and (max-width: 519px) {}
+
+/* media-query-end*/

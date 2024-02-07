@@ -1,0 +1,139 @@
+.contact-section {
+    background-color: #f8e2cf;
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+
+.contact-heading h2 {
+    font-family: poppins;
+    font-size: 26px;
+    color: #165737;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+}
+
+.contact-form {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-form input {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    /* border: 2px solid #165737; */
+    outline: none;
+}
+
+.contact-form input::placeholder {
+    font-size: 12px;
+}
+
+.contact-form label {
+    font-family: poppins;
+    /* font-style: italic; */
+    color: #24456d;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.send-btn {
+    padding: 8px 16px;
+    color: #fff; 
+    background-color: #bf6944;
+    border: none;
+    font-size: 14px;
+}
+
+.footer-img img {
+    width: 100%;
+    height: 120px;
+    background-size: cover;
+}
+
+.ul-bg {
+    background-color: #FACD01;
+}
+
+.footer-ul {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-ul li a {
+    color: #165737;
+    font-weight: 600;
+}
+
+.address-bar {
+    background-color: #24456d;
+    padding: 10px;
+}
+
+.address-bar ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.address-bar li a i {
+    color: #fff;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.address-bar li a {
+    color: #fff;
+    font-weight: 700;
+}
+
+
+
+
+.contact-heading h2 {
+    display: flex;
+    justify-content: center;
+    font-size: 52px;
+    font-weight: 500;
+    color: #24456d;
+    position: relative;
+    font-family: poppins;
+}
+
+.tie-box {
+    display: flex;
+    justify-content: center;
+}
+
+.tie-box img {
+    width: 60px;
+    height: 120px;
+}
+
+
+.contact-heading p {
+    color: #335174;
+    font-family: poppins;
+    text-align: center;
+    font-weight: 400;
+    /* padding-top: 20px; */
+    padding-bottom: 15px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.contact-number {
+    font-size: 18px;
+    color: #335174;
+    text-align: center;
+    font-weight: 600;
+}
+
+.contact-number a {
+    font-size: 16px;
+    color: #335174;
+    font-weight: 300;
+
+}

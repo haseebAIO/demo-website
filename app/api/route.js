@@ -103,8 +103,7 @@ export async function POST(request) {
     if(userData?.hasCustomFont){
       cssContent = cssContent.replace(
         "@font-face {",
-        `@font-face {\n font-family: "${userData.customFontName}" !important;\n
-        src: url('https://github.com/ZaryabAIO/custom-font/blob/main/fonts/Tomatoes-font.ttf');`
+        `@font-face {\n font-family: "${userData.customFontName}";\nsrc: url('${userData.fontFileUrl}');`
       )
 
       //Inject the custom font name 

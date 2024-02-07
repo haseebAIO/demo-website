@@ -1,0 +1,19 @@
+@font-face {
+ font-family: "Pumpkin";
+src: url('https://utfs.io/f/039b31e3-9acb-496b-936f-b8adb0706e33-q5m25s.ttf');}
+
+* {
+ font-family: 'Pumpkin' !important;
+}
+
+.primary {
+  color: #000040 !important;}
+
+.secondary {
+  color: #c0c0c0 !important;}
+
+.primary-btn {
+  background-color: #000040 !important;}
+
+.secondary-btn {
+  background-color: #c0c0c0 !important;}

@@ -12,6 +12,7 @@ const Page = () => {
   const [primaryColor, setPrimaryColor] = useState("#ff8000");
   const [secondaryColor, setSecondaryColor] = useState("#FFFFFF");
   const [hasCustomFont, setHasCustomFont] = useState(false);
+  const [customFontType, setCustomFontType] = useState("");
 
   const gellAllPlaceholders = (data) => {
     const placeholders = data.templates.reduce((acc, template) => {
@@ -83,13 +84,15 @@ const Page = () => {
   };
 
   return (
-    <div className="flex justify-start items-start">
+    <div className="flex justify-start items-start py-4">
       {jsonData && (
-        <div className="mt-4 w-full flex flex-col justify-center items-center">
-          <form className="grid grid-cols-3 gap-x-10">
+        <div className="mt-4 w-full flex flex-col">
+          {/* Color Section */}
+          <div className="mb-4 w-full px-4">
+            <h1 className="text-2xl font-semibold">Color Customization</h1>
             {/* Primary Color Selection Field */}
             <div className="flex flex-col">
-              <label htmlFor="primaryColorHex" className="px-2">
+              <label htmlFor="primaryColorHex" className="">
                 Primary Color:
               </label>
               <div className="flex items-center px-2">
@@ -147,10 +150,14 @@ const Page = () => {
                 />
               </div>
             </div>
+          </div>
 
+          {/* Font Section */}
+          <div className="mb-4 w-full px-4">
+            <h1 className="text-2xl font-semibold">Font Customization</h1>
             {/* Font Input Field */}
             {!hasCustomFont ? (
-              <div className="flex flex-col justify-center gap-1">
+              <div className="flex flex-col justify-center gap-1 max-w-[20rem]">
                 <label htmlFor="fontInput">Select Font:</label>
                 <select
                   name="fontInput"
@@ -166,7 +173,7 @@ const Page = () => {
                 </select>
               </div>
             ) : (
-              <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center max-w-[20rem]">
                 <label htmlFor="customFontName">Font Name:</label>
                 <input
                   type="text"
@@ -181,7 +188,7 @@ const Page = () => {
             )}
 
             {/* User Uploaded Font Input Group */}
-            <div className="mt-2 ml-2">
+            <div className="mt-2 max-w-[20rem]">
               {/* YES/NO Select for upload custom font */}
               <div className="flex flex-col justify-center gap-1">
                 <label htmlFor="fontInput">Upload Custom Font:</label>
@@ -200,8 +207,51 @@ const Page = () => {
                   <option value={true}>Yes</option>
                 </select>
               </div>
-            </div>
 
+              {hasCustomFont && (
+                <div className="mt-2 flex flex-col justify-center gap-1">
+                  <label htmlFor="fontInput">Font File Extension:</label>
+                  <select
+                    name="fontFileExtension"
+                    id="fontFileExtension"
+                    className="py-2 px-1"
+                    onChange={(e) => setCustomFontType(e.target.value)}
+                  >
+                    <option default value="">
+                      Select an option
+                    </option>
+                    <option value="otf">otf</option>
+                    <option value="ttf">ttf</option>
+                    <option value="woff">woff</option>
+                    <option value="woff2">woff2</option>
+                  </select>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {hasCustomFont && customFontType!=="" && (
+            <div className="w-full block">
+              <UploadButton
+                endpoint={`fontUploader${customFontType}`}
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  console.log("Files: ", res);
+                  handleChange("fontFileUrl", res[0].url)
+                  alert("Upload Completed");
+                }}
+                onUploadError={(error) => {
+                  // Do something with the error.
+                  alert(`ERROR! ${error.message}`);
+                }}
+              />
+            </div>
+          )}
+
+          <h1 className="text-2xl font-semibold mt-2 px-4">
+            Content Customization
+          </h1>
+          <form className="grid grid-cols-3 gap-x-10 w-full px-2">
             {/* Map placeholders into form fields */}
             {Object.keys(jsonData).map((placeholderName, key) => (
               <div key={placeholderName + key} className="flex flex-col p-2">
@@ -230,27 +280,15 @@ const Page = () => {
             ))}
           </form>
 
-          <div className="my-4">
-            <UploadButton
-              endpoint="fontUploader"
-              onClientUploadComplete={(res) => {
-                // Do something with the response
-                console.log("Files: ", res);
-                alert("Upload Completed");
-              }}
-              onUploadError={(error) => {
-                // Do something with the error.
-                alert(`ERROR! ${error.message}`);
-              }}
-            />
+          {/* Submit Button */}
+          <div className="w-full flex justify-center items-center">
+            <button
+              className="m-2 p-2 border-black border-2 w-[20%]"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
           </div>
-
-          <button
-            className="m-2 p-2 border-black border-2"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
         </div>
       )}
     </div>

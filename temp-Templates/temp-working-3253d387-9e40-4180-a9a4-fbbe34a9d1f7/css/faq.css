@@ -1,0 +1,26 @@
+.faq-section {
+    padding-top: 3%;
+}
+
+.faq-heading-box h2 {
+    text-align: center;
+    font-size: 48px;
+    color: #24456d;
+    padding-bottom: 60px;
+}
+.faq-text{
+    text-align: center;
+}
+.faq-text h4{
+ font-size: 20px;
+ color: #24456d;
+ font-weight: 600;
+ padding-bottom: 20px;
+}
+.faq-text p{
+ font-size: 16px;
+ color: #24456d;
+ padding-bottom: 15px;
+
+
+}
